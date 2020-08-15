@@ -1,0 +1,78 @@
+git init
+
+cd E:\Sachin\Learning\Git_syncup (go to specific folder)
+
+
+git remote add origin git@github.com:pythonvirus/Meetup.git
+
+git remote add origin git@github.com:pythonvirus/R_Python_PySpark_AzureML_Scrapping.git
+
+git remote add origin git@github.com:pythonvirus/Research_Papers.git
+
+git remote add origin git@github.com:pythonvirus/ML_Journey.git
+
+git remote add origin git@github.com:pythonvirus/DL_Journey.git
+
+git remote add origin git@github.com:pythonvirus/NLP_Journey.git
+
+git remote add origin git@github.com:pythonvirus/CNN_Journey.git
+git remote add origin git@github.com:pythonvirus/Sachin_Private.git
+
+git status #It will show what all in committed to git.
+
+git diff <code file path> #it will show the code difference
+
+git add .
+
+git add <code file path> #Adding code file in local session
+
+git commit -m "<commit message>" # it will commit local session files.
+
+git push #it will push the files to git repository.
+
+git push --set-upstream origin master
+
+git push origin <branch name> #it will push to the specified branch.
+
+###########if the recently repository has been updated then we have pull the changes first before pushing back"
+
+git reset HEAD "<file path>" or .
+
+git config user.name "pythonvirus"
+
+git config user.email "sachingupta.itm@gmail.com"
+#################Steps to map repository ###################################### 
+ssh-keygen 
+
+#above command generate the key on below path...
+C:\Users\sachin.gupta\.ssh\id_rsa.pub
+
+got to setting->SSH and GPS key -> Add the generated key(of id_rsa.pub) as new key.
+
+
+################Using cherry pick , we can got old version###########################
+git revert
+
+git clone url
+
+
+Git command to create new branch
+
+FOR CHECKOUT NEW PROJECT -> 
+	cd Dnyandev_Shelar/Java/CourtQ/Git\ Bash/
+	git clone http://corp-git-01.lason.com/rule14-product/courtq/CourtQapi.git
+	cd CourtQapi
+	git checkout -b DnyandevShelar
+	git push origin DnyandevShelar
+	cd 
+
+FOR COMMIT A CODE -> 
+
+	cd CourtQapi
+	git status
+	git add .
+	git commit -m "Profile Added In POM.XML"
+	git push origin DnyandevShelar
+
+
+
