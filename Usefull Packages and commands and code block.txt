@@ -1,0 +1,378 @@
+#######################To see the webservice running or not##########################################
+
+ps -aux|grep /python
+
+
+####################Kill the pid##################################################################
+
+sudo kill -9 <pid>
+
+
+####################Login to JET portal using Terminal######################################################
+ssh -i /home/ganeshkharad/Documents/JetLegal/jet_docker.pem jet@10.198.1.208
+
+
+###################################pip install error#############################
+sudo -H pip install --ignore-installed -U fitz(<Package Name>)
+
+###################################mount qnap#############################
+sudo mount -a
+
+###################PDF to text package installation########################3
+
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+
+################# To check the log #####################################
+
+tailf fileName.log
+##########################To see install python version########################
+type python and then press <tab>
+
+#######################login as Root user#######################################
+sudo su(login as root user)
+sudo jet(login as jet user)
+
+######################Release the port or Kill the all task by web service port no#############################
+fuser -k <portno>/tcp
+
+
+#################verify if specific package has been installed on your system or not############################
+pip freeze | grep <package name>
+
+########################To see the Linux system CPU configuration##########################################
+lscpu
+
+#######################To create Virtual Environment#######################################################
+
+#
+#environments is directory
+#project_env is project_name
+===================================
+
+sudo apt-get install -y python3-venv #Install virtual environment
+python3 -m venv project_env(create a environment) 
+ls project_env(to see the environment files)
+source project_env/bin/activate (activate the env)
+
+###########################Docker Image########################################
+
+Docker installation
+
+https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04
+
+# Build docker image
+docker build -t {name of image}:latest .
+
+# Run the Build image
+docker run -it {name of image}
+
+#Run docker image # 5039 : web service port 
+docker run -d -p 5039(server port):5039(flask application port) {name of image}
+
+#Check docker running process
+docker ps
+
+#Check docker images
+docker images
+
+#Check docker image logs
+docker logs {image ID}
+docker logs --tail 2500 ContainerName/ContainerID
+ 
+
+# save docker image 
+docker save -o  {/home/parag.patil/Parag/web_service/ner-redaction.tar} {ner-redaction}
+
+# Load docker image
+docker load -i {/home/parag.patil/Parag/web_service/ner-redaction.tar}
+
+#To stop docker 
+docker stop {name of image}
+
+#Viewing the stopped container..
+docker ps -a
+
+#Login to docker image
+sudo docker exec -it <container id> bash
+
+sudo docker exec -it f278fca17873 bash
+
+#Mounting  server folder to docker 
+sudo docker run --name cm-tool-app2 -v /home/ganeshkharad/Downloads/Projects/Docker/cmjetmodel_v2/process/:/process/ -p 5000:5000 cm-app2
+
+# acess of tar file 
+sudo chmod 777 -R ner-redaction.tar
+
+# to remove none images 
+docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")
+
+Example: 
+sudo docker run -d -it --name pdf-redaction_container -p 5033:5033 pdf-redaction:latest
+sudo docker run -d -it --name ner-redaction_container -p 5039:5039 ner-redaction:latest
+
+##############################################################Encrypting the Py file###############################
+package pyarmor
+pyarmor obfuscate {PDF_deduction.py}
+
+#####################################################To check Linux system usage and available memory#################
+df -h (To see the available space on server)
+free -g(To see the available RAM on server)
+
+lscpu: list CPU and processor info
+hwinfo: generic hardware information
+lspci: PCI busses, including graphics card, network adapter
+lsblk: list block devices (storate and partitions)
+df -h: disk free
+free -h: total, free, used RAM
+
+#######################################To see the current version OS system of Linux##################################
+cat /etc/os-release
+
+#################################installing the dependencies using one file##########################################
+pip freeze(to see all install package)
+
+Copy the above command output in requirement.txt file.
+
+pip3 --no-cache-dir install -r requirement.txt
+######################################Qnap Password reset#########################################################
+1 - Change password:
+
+Command:
+sudo nano /etc/fstab
+
+2- Then reboot the PC
+
+########################################shutdown system remotely####################################################
+ssh username@ip
+then enter the password
+sudo reboot
+
+#############################change the server timing###############################################################
+sudo date +%T -s "23:32:59" #Need to set IST timezone
+
+###########################Writing CSV issue parameters###########################################################
+data.to_csv(out_path+"/"+"POC_11_March_638Docs_Final.csv", encoding='utf-8', columns=nameslist,index=False,line_terminator="")
+
+##################################Python 3 to Python 2 conversion################################################
+pip3 install 2to3
+
+2to3 . -w
+
+#################################Set the current working directory##################################################
+script_dir = (os.path.dirname(os.path.realpath(__file__)))
+os.chdir(script_dir)
+
+##################### Permission for key file ##############################################
+chmod 0400 key_file_path(private_key) #Allow Owner to read. 
+
+#####################Plot distribution of each feature#######################################
+def plot_distribution(dataset, cols=5, width=20, height=15, hspace=0.2, wspace=0.5):
+    plt.style.use('seaborn-whitegrid')
+    fig = plt.figure(figsize=(width,height))
+    fig.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=wspace, hspace=hspace)
+    rows = math.ceil(float(dataset.shape[1]) / cols)
+    for i, column in enumerate(dataset.columns):
+        ax = fig.add_subplot(rows, cols, i + 1)
+        ax.set_title(column)
+        if dataset.dtypes[column] == np.object:
+            g = sns.countplot(y=column, data=dataset)
+            substrings = [s.get_text()[:18] for s in g.get_yticklabels()]
+            g.set(yticklabels=substrings)
+            plt.xticks(rotation=25)
+        else:
+            g = sns.distplot(dataset[column])
+            plt.xticks(rotation=25)
+    
+plot_distribution(train.dropna(), cols=3, width=20, height=20, hspace=0.45, wspace=0.5)
+
+
+######################################Running multiple python at once##########################
+for f in *.py;do python "$f"; done<message>
+
+#################################Run the script in multiple thread#############################
+ls *.py|xargs -n 1 -p 3 python3
+
+#######################Bi Directional LSTM#################################################################
+
+from keras.preprocessing import sequence
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Embedding, LSTM, Bidirectional
+
+from keras.preprocessing.text import Tokenizer
+EMBEDDING_DIMENSION = 64
+VOCABULARY_SIZE = 2000
+MAX_LENGTH = 100
+OOV_TOK = '<OOV>'
+TRUNCATE_TYPE = 'post'
+PADDING_TYPE = 'post'
+
+tokenizer1 = Tokenizer(num_words=VOCABULARY_SIZE, oov_token=OOV_TOK)
+tokenizer1.fit_on_texts(list(x_train) + list(x_test))
+
+x_train_sequences = tokenizer1.texts_to_sequences(x_train)
+x_test_sequences = tokenizer1.texts_to_sequences(x_test)
+word_index = tokenizer1.word_index
+print('Vocabulary size:', len(word_index))
+dict(list(word_index.items())[0:10])
+
+x_train_pad = sequence.pad_sequences(x_train_sequences, maxlen=MAX_LENGTH, padding=PADDING_TYPE, truncating=TRUNCATE_TYPE)
+x_test_pad = sequence.pad_sequences(x_test_sequences, maxlen=MAX_LENGTH, padding=PADDING_TYPE, truncating=TRUNCATE_TYPE)
+
+max_features = 20000
+# cut texts after this number of words
+# (among top max_features most common words)
+maxlen = 100
+batch_size = 32
+
+
+#print(len(x_train), 'train sequences')
+#print(len(x_test), 'test sequences')
+
+y_train = np.array(y_train)
+y_test = np.array(y_test)
+
+model = Sequential()
+model.add(Embedding(max_features, 128, input_length=maxlen))
+model.add(Bidirectional(LSTM(64)))
+model.add(Dropout(0.5))
+model.add(Dense(1, activation='sigmoid'))
+
+# try using different optimizers and different optimizer configs
+model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
+
+print('Train...')
+model.fit(x_train_pad, y_train,
+          batch_size=batch_size,
+          epochs=4,
+          validation_data=[x_test_pad, y_test])
+
+
+######################################LSTM+CNN#####################################################
+from keras.layers import Conv1D, MaxPooling1D
+model = Sequential()
+model.add(Embedding(max_features,128, input_length=maxlen)#200
+model.add(Dropout(0.25))#15
+
+
+model.add(Conv1D(filters,
+                kernel_size,
+                padding='valid',
+                activation='relu',
+                strides=1))
+model.add(MaxPooling1D(pool_size=pool_size))
+model.add(LSTM(lstm_output_size))
+model.add(Dense(1))
+model.add(Activation('sigmoid'))
+# try using different optimizers and different optimizer configs
+model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
+
+############################################Time Calculation in Model Run###################################
+
+def timer(start_time=None):
+    if not start_time:
+        start_time = datetime.now()
+        return start_time
+    elif start_time:
+        thour, temp_sec = divmod((datetime.now() - start_time).total_seconds(), 3600)
+        tmin, tsec = divmod(temp_sec, 60)
+        print('\n Time taken: %i hours %i minutes and %s seconds.' % (thour, tmin, round(tsec, 2)))
+
+from datetime import datetime
+# Here we go
+start_time = timer(None) # timing starts from this point for "start_time" variable
+random_search.fit(X,Y)
+timer(start_time) # timing ends here for "start_time" variable
+
+######################################soft cosine#################################################################
+
+import gensim.downloader as api
+from gensim import corpora
+from gensim.matutils import softcossim
+
+# download only once after that comment this line 
+fasttext_model300 = api.load('fasttext-wiki-news-subwords-300')
+
+def get_cosine(sent_1, sent_2):
+    
+    documents = [sent_1, sent_2]
+    dictionary = corpora.Dictionary(documents)
+    
+    # Prepare the similarity matrix
+    similarity_matrix = fasttext_model300.similarity_matrix(dictionary)
+    
+    # Convert the sentences into bag-of-words vectors.
+    sent_1 = dictionary.doc2bow(sent_1)
+    sent_2 = dictionary.doc2bow(sent_2)
+    
+    # Compute soft cosine similarity
+    simc=softcossim(sent_1, sent_2, similarity_matrix)
+
+
+    return simc
+	
+####################################################pipenv###########################################################
+pipenv --python <python3.7 or path of python>
+
+To get the python path using below command:-(work on linux)
+which python3.6
+
+pipenv shell #It will activate the python environment
+
+pipenv install #Move the env pip file to location then run the command. It will create the environment for you.
+
+####################Legal Clause information for CM Tool ##############################################
+https://www.lawinsider.com/clause/assignment
+
+
+########### ROUGE FUNCTION #####################################################################
+
+from rouge_score import rouge_scorer
+
+scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+
+def match_score(text1,text2):
+    scores = scorer.score(text1,text2)
+    res=scores['rougeL'] 
+    finalScore = round(res.fmeasure,3)
+    return finalScore # you can use precision, recall or fmeasure 
+    
+   
+results_df['Rouge_Score']=results_df.apply(lambda x: match_score(str(x['Contract Title']).lower().strip(),str(x['Pred Contract Title']).lower().strip()),axis=1)
+############################################Running OCR of DS server##################################################3
+
+1.	Copy input and output folder into the server using Filezilla 
+1.	use folder path: /home/application/Jet/ocr on server 
+2.	'input' folder: it will contain PDF files
+3.	'output' folder: OCR will store text files into this folder
+2.	Run the below command on the application server for OCR
+
+nohup sudo docker run --rm --name ocr_container -v /home/application/Jet/ocr:/app ocr_pink_green_t5 python3 /app/pdf_to_text_conversion_OCR_PP_20200716.py /app/input/ /app/output/ >> pdf_to_text_conversion_OCR_PP_20200716.log 2>&1 &
+
+/home/application/Jet/ocr: vertual mount path where OCR code and input and output folder is preset
+
+/app/input/ : PDF input path 
+
+/app/output/: PDF output path
+
+3.  You can check the logs of OCR running status using cmd:
+tailf pdf_to_text_conversion_OCR_PP_20200716.log
+
+
+###################################### To See No of files under the folder ############################################
+
+ls -ltr
+
+ls -ltr *txt|wc
+
+######################################SVC/SVM Grid search hyper tunning###############################################
+ clf_svm_aol = SVC(probability=True)
+      
+    lrParam = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
+                    'C': [1, 10, 100, 1000]},
+                   {'kernel': ['linear'], 'C': [1, 10,100,1000]}]
+    lrParam = [{'kernel': ['linear'], 'C': [0.4,0.5,0.7,1, 10]}]
+    lrGrid = GridSearchCV(clf_svm_aol, lrParam, cv=2)
+	
+############################### Spacy install on windows############################################################
+For spacy libarary load on windows:-
+pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
