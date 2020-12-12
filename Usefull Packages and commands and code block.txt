@@ -97,6 +97,10 @@ sudo docker exec -it <container id> bash
 
 sudo docker exec -it f278fca17873 bash
 
+#To check the running status of docker 
+CMD:  docker stats
+
+
 #Mounting  server folder to docker 
 sudo docker run --name cm-tool-app2 -v /home/ganeshkharad/Downloads/Projects/Docker/cmjetmodel_v2/process/:/process/ -p 5000:5000 cm-app2
 
@@ -378,6 +382,8 @@ For spacy libarary load on windows:-
 pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
 
 ################################Deep learning plotting of loss###############################################
+
+--------One time code------
 %%time
 history = horsepower_model.fit(
     train_features['Horsepower'], train_labels,
@@ -401,3 +407,79 @@ def plot_loss(history):
   plt.grid(True)
   
  plot_loss(history)
+ 
+ import matplotlib.pyplot as plt
+
+----Generic one------
+def plot_graphs(history, string):
+  plt.plot(history.history[string])
+  plt.plot(history.history['val_'+string])
+  plt.xlabel("Epochs")
+  plt.ylabel(string)
+  plt.legend([string, 'val_'+string])
+  plt.show()
+  
+  plot_graphs(history, 'accuracy')
+  
+  plot_graphs(history, 'loss')
+  
+  
+######################Model call back till expected loss reached ###########################3
+
+import tensorflow as tf
+
+class myCallback(tf.keras.callbacks.Callback):
+  def on_epoch_end(self, epoch, logs={}):
+    if(logs.get('accuracy')>0.6):
+      print("\nReached 60% accuracy so cancelling training!")
+      self.model.stop_training = True
+
+mnist = tf.keras.datasets.fashion_mnist
+
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+callbacks = myCallback()
+
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dense(512, activation=tf.nn.relu),
+  tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+])
+model.compile(optimizer=tf.optimizers.Adam(),
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history=model.fit(x_train, y_train, epochs=10, callbacks=[callbacks])
+
+
+##############################Computer Generated Human Figure#######################################
+
+
+!wget --no-check-certificate \
+    https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip \
+    -O /tmp/horse-or-human.zip
+	
+	
+import os
+import zipfile
+
+local_zip = '/tmp/horse-or-human.zip'
+zip_ref = zipfile.ZipFile(local_zip, 'r')
+zip_ref.extractall('/tmp/horse-or-human')
+zip_ref.close()
+
+# Directory with our training horse pictures
+train_horse_dir = os.path.join('/tmp/horse-or-human/horses')
+
+# Directory with our training human pictures
+train_human_dir = os.path.join('/tmp/horse-or-human/humans')
+
+train_horse_names = os.listdir(train_horse_dir)
+print(train_horse_names[:10])
+
+train_human_names = os.listdir(train_human_dir)
+print(train_human_names[:10])
+
+
+ eigen value (a scalar for the eigen vector which does not change the direction (principle axis)), principle component hence the most significant eigen value which contains most of the information in matrix (data)
